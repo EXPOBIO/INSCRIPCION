@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<base target="_top">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>EXPOBIO 2026 · Inscripción Grupo de 10</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+	<link rel="icon" type="image/png" sizes="32x32" href="https://files.catbox.moe/zftv8w.png">
+	<link rel="shortcut icon" href="https://files.catbox.moe/zftv8w.png">
+	<meta name="theme-color" content="#234F40">
+</head>
+
+<body>
+	<div class="carta">
+		<div class="box-titulo">
+			<img class="Escudo-UNSAAC" src="Logaso.png">
+		</div>
+	</div>
+
+	<div class="carta">
+		<button class="btn-volver-form" onclick="window.top.location.href='index.html'">← Volver</button>
+
+		<div class="form-titulo">
+			<h1>Inscripción · Grupo de 10</h1>
+			<p>Inscripción grupal, con descuento, un solo voucher</p>
+		</div>
+
+		<!-- Pantalla de éxito -->
+		<div class="pantalla-exito-form" id="pantalla-exito">
+			<div class="icono-exito">✅</div>
+			<h2>¡Inscripción registrada!</h2>
+			<p id="texto-exito"></p>
+
+			<div class="bloque-whatsapp-form">
+				<p>Únete al grupo de WhatsApp del evento para recibir avisos y novedades:</p>
+				<img src="https://files.catbox.moe/nkxwii.png" alt="QR grupo de WhatsApp">
+				<br>
+				<a class="btn-whatsapp-form" href="https://chat.whatsapp.com/Cix0z7MfklF2IRO6JGSNrm?s=qt&p=a&mlu=1" target="_blank" rel="noopener">
+					📲 Unirme al grupo de WhatsApp
+				</a>
+			</div>
+
+			<br>
+			<button type="button" class="btn-reiniciar-form" onclick="reiniciar()">Registrar otra inscripción</button>
+		</div>
+
+		<form id="formInscripcion">
+			<div class="seccion-form">
+				<h3>Integrantes del grupo</h3>
+				<div class="nota-form">Ingresa a los 10 integrantes. El DNI se usa únicamente para la entrega correcta de certificados.</div>
+				<div class="tabla-responsive-form">
+					<table class="tabla-grupo-form">
+						<thead>
+							<tr>
+								<th>N°</th><th>Nombres</th><th>Ap. paterno</th><th>Ap. materno</th>
+								<th>Universidad</th><th>Facultad</th><th>Código</th><th>DNI</th><th>Celular</th>
+							</tr>
+						</thead>
+						<tbody id="cuerpo-tabla-grupo"></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="seccion-form">
+				<h3>Voucher de pago</h3>
+				<div class="archivo-input-form">
+					Sube una foto o captura de tu comprobante (un solo voucher para todo el grupo)
+					<br>
+					<input type="file" id="voucher" accept="image/*,application/pdf" required>
+				</div>
+			</div>
+
+			<button type="submit" id="btnEnviar" class="btn-enviar-form">Enviar inscripción</button>
+			<div id="mensaje-form"></div>
+		</form>
+	</div>
+
+	<script src="common.js"></script>
+	<script>
+		const facultadDefault = "Ciencias Biológicas";
+		const cuerpoTabla = document.getElementById('cuerpo-tabla-grupo');
+		for (let i = 1; i <= 10; i++) {
+			const fila = document.createElement('tr');
+			fila.innerHTML =
+				'<td>' + i + '</td>' +
+				'<td><input type="text" class="grupo-nombres" required></td>' +
+				'<td><input type="text" class="grupo-appaterno" required></td>' +
+				'<td><input type="text" class="grupo-apmaterno" required></td>' +
+				'<td><input type="text" class="grupo-universidad" required></td>' +
+				'<td><input type="text" class="grupo-facultad" required value="' + facultadDefault + '"></td>' +
+				'<td><input type="text" class="grupo-codigo" required maxlength="6" pattern="[0-9]{6}" inputmode="numeric"></td>' +
+				'<td><input type="text" class="grupo-dni" required maxlength="8" inputmode="numeric"></td>' +
+				'<td><input type="tel" class="grupo-celular" required></td>';
+			cuerpoTabla.appendChild(fila);
+		}
+
+		const form = document.getElementById('formInscripcion');
+		const btnEnviar = document.getElementById('btnEnviar');
+		const mensaje = document.getElementById('mensaje-form');
+		const pantallaExito = document.getElementById('pantalla-exito');
+
+		activarLimpiezaDeErrores(form);
+
+		function reiniciar() {
+			reiniciarFormularioGenerico(form, pantallaExito);
+		}
+
+		form.addEventListener('submit', async function (e) {
+			e.preventDefault();
+
+			if (formularioTieneEspaciosVacios(form)) {
+				mensaje.className = 'error';
+				mensaje.textContent = 'Hay campos sin completar (marcados en rojo). Revisa que no queden vacíos ni con solo espacios.';
+				return;
+			}
+
+			btnEnviar.disabled = true;
+			btnEnviar.textContent = 'Enviando...';
+			mensaje.className = '';
+
+			const archivoVoucher = document.getElementById('voucher').files[0];
+			const voucherBase64 = await leerArchivoComoBase64(archivoVoucher);
+			const voucherNombre = archivoVoucher ? archivoVoucher.name : '';
+
+			const nombresEl = document.querySelectorAll('.grupo-nombres');
+			const apPaternoEl = document.querySelectorAll('.grupo-appaterno');
+			const apMaternoEl = document.querySelectorAll('.grupo-apmaterno');
+			const universidadesEl = document.querySelectorAll('.grupo-universidad');
+			const facultadesEl = document.querySelectorAll('.grupo-facultad');
+			const codigosEl = document.querySelectorAll('.grupo-codigo');
+			const dnisEl = document.querySelectorAll('.grupo-dni');
+			const celularesEl = document.querySelectorAll('.grupo-celular');
+
+			const integrantes = [];
+			for (let i = 0; i < nombresEl.length; i++) {
+				integrantes.push({
+					nombres: nombresEl[i].value.trim(),
+					apellidoPaterno: apPaternoEl[i].value.trim(),
+					apellidoMaterno: apMaternoEl[i].value.trim(),
+					universidad: universidadesEl[i].value.trim(),
+					facultad: facultadesEl[i].value.trim(),
+					codigo: codigosEl[i].value.trim(),
+					dni: dnisEl[i].value.trim(),
+					celular: celularesEl[i].value.trim()
+				});
+			}
+
+			const datos = {
+				tipo: 'Grupo10',
+				voucherBase64: voucherBase64,
+				voucherNombre: voucherNombre,
+				integrantes: integrantes
+			};
+
+			enviarInscripcion(datos)
+				.then(function (respuesta) {
+					btnEnviar.disabled = false;
+					btnEnviar.textContent = 'Enviar inscripción';
+					if (respuesta.ok) {
+						document.getElementById('texto-exito').textContent = respuesta.mensaje;
+						form.style.display = 'none';
+						pantallaExito.classList.add('visible');
+					} else {
+						mensaje.className = 'error';
+						mensaje.textContent = respuesta.mensaje;
+					}
+				})
+				.catch(function (error) {
+					btnEnviar.disabled = false;
+					btnEnviar.textContent = 'Enviar inscripción';
+					mensaje.className = 'error';
+					mensaje.textContent = 'Error: ' + error.message;
+				});
+		});
+	</script>
+</body>
+</html>

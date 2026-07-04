@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<base target="_top">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>EXPOBIO 2026 · Inscripción Egresado</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+	<link rel="icon" type="image/png" sizes="32x32" href="https://files.catbox.moe/zftv8w.png">
+	<link rel="shortcut icon" href="https://files.catbox.moe/zftv8w.png">
+	<meta name="theme-color" content="#234F40">
+</head>
+
+<body>
+	<div class="carta">
+		<div class="box-titulo">
+			<img class="Escudo-UNSAAC" src="Logaso.png">
+		</div>
+	</div>
+
+	<div class="carta">
+		<button class="btn-volver-form" onclick="window.top.location.href='index.html'">← Volver</button>
+
+		<div class="form-titulo">
+			<h1>Inscripción · Egresado / Profesional</h1>
+			<p>Inscripción de no universitario, con pago</p>
+		</div>
+
+		<!-- Pantalla de éxito -->
+		<div class="pantalla-exito-form" id="pantalla-exito">
+			<div class="icono-exito">✅</div>
+			<h2>¡Inscripción registrada!</h2>
+			<p id="texto-exito"></p>
+
+			<div class="bloque-whatsapp-form">
+				<p>Únete al grupo de WhatsApp del evento para recibir avisos y novedades:</p>
+				<img src="https://files.catbox.moe/nkxwii.png" alt="QR grupo de WhatsApp">
+				<br>
+				<a class="btn-whatsapp-form" href="https://chat.whatsapp.com/Cix0z7MfklF2IRO6JGSNrm?s=qt&p=a&mlu=1" target="_blank" rel="noopener">
+					📲 Unirme al grupo de WhatsApp
+				</a>
+			</div>
+
+			<br>
+			<button type="button" class="btn-reiniciar-form" onclick="reiniciar()">Registrar otra inscripción</button>
+		</div>
+
+		<form id="formInscripcion">
+			<div class="seccion-form">
+				<h3>Datos personales</h3>
+				<div class="fila-form tres">
+					<div class="campo-form">
+						<label for="nombres">Nombres</label>
+						<input type="text" id="nombres" name="nombres" required>
+					</div>
+					<div class="campo-form">
+						<label for="apellidoPaterno">Apellido paterno</label>
+						<input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
+					</div>
+					<div class="campo-form">
+						<label for="apellidoMaterno">Apellido materno</label>
+						<input type="text" id="apellidoMaterno" name="apellidoMaterno" required>
+					</div>
+				</div>
+				<div class="fila-form dos">
+					<div class="campo-form corto">
+						<label for="dni">DNI</label>
+						<input type="text" id="dni" name="dni" maxlength="8" inputmode="numeric" required>
+						<div class="ayuda-form">Para tu certificado.</div>
+					</div>
+					<div class="campo-form corto">
+						<label for="celular">Celular</label>
+						<input type="tel" id="celular" name="celular" required>
+					</div>
+				</div>
+			</div>
+
+			<div class="seccion-form">
+				<h3>Datos de institución</h3>
+				<div class="campo-form">
+					<label for="institucion">Institución</label>
+					<input type="text" id="institucion" name="institucion" required>
+				</div>
+			</div>
+
+			<div class="seccion-form">
+				<h3>Voucher de pago</h3>
+				<div class="archivo-input-form">
+					Sube una foto o captura de tu comprobante
+					<br>
+					<input type="file" id="voucher" accept="image/*,application/pdf" required>
+				</div>
+			</div>
+
+			<button type="submit" id="btnEnviar" class="btn-enviar-form">Enviar inscripción</button>
+			<div id="mensaje-form"></div>
+		</form>
+	</div>
+
+	<script src="common.js"></script>
+	<script>
+		const form = document.getElementById('formInscripcion');
+		const btnEnviar = document.getElementById('btnEnviar');
+		const mensaje = document.getElementById('mensaje-form');
+		const pantallaExito = document.getElementById('pantalla-exito');
+
+		activarLimpiezaDeErrores(form);
+
+		function reiniciar() {
+			reiniciarFormularioGenerico(form, pantallaExito);
+		}
+
+		form.addEventListener('submit', async function (e) {
+			e.preventDefault();
+
+			if (formularioTieneEspaciosVacios(form)) {
+				mensaje.className = 'error';
+				mensaje.textContent = 'Hay campos sin completar (marcados en rojo). Revisa que no queden vacíos ni con solo espacios.';
+				return;
+			}
+
+			btnEnviar.disabled = true;
+			btnEnviar.textContent = 'Enviando...';
+			mensaje.className = '';
+
+			const archivoVoucher = document.getElementById('voucher').files[0];
+			const voucherBase64 = await leerArchivoComoBase64(archivoVoucher);
+			const voucherNombre = archivoVoucher ? archivoVoucher.name : '';
+
+			const datos = {
+				tipo: 'Egresado',
+				voucherBase64: voucherBase64,
+				voucherNombre: voucherNombre,
+				nombres: document.getElementById('nombres').value.trim(),
+				apellidoPaterno: document.getElementById('apellidoPaterno').value.trim(),
+				apellidoMaterno: document.getElementById('apellidoMaterno').value.trim(),
+				dni: document.getElementById('dni').value.trim(),
+				celular: document.getElementById('celular').value.trim(),
+				institucion: document.getElementById('institucion').value.trim()
+			};
+
+			enviarInscripcion(datos)
+				.then(function (respuesta) {
+					btnEnviar.disabled = false;
+					btnEnviar.textContent = 'Enviar inscripción';
+					if (respuesta.ok) {
+						document.getElementById('texto-exito').textContent = respuesta.mensaje;
+						form.style.display = 'none';
+						pantallaExito.classList.add('visible');
+					} else {
+						mensaje.className = 'error';
+						mensaje.textContent = respuesta.mensaje;
+					}
+				})
+				.catch(function (error) {
+					btnEnviar.disabled = false;
+					btnEnviar.textContent = 'Enviar inscripción';
+					mensaje.className = 'error';
+					mensaje.textContent = 'Error: ' + error.message;
+				});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://files.catbox.moe/zftv8w.png">
+  <link rel="shortcut icon" href="https://files.catbox.moe/zftv8w.png">
+
+  <!-- Color de la barra del navegador en móviles -->
+  <meta name="theme-color" content="#4CAF50">
+
+  <!-- Google Fonts: Noto Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Tu archivo CSS externo vinculado -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="carta">
+	<div class="box-titulo">
+		<img class="Escudo-UNSAAC" src="Logaso.png">
+	</div>
+    </div>
+    <div class="carta">
+  <div class="wrap">
+    <div class="top">
+      <h1> Guía de métodos de pago</h1>
+      <p>Puedes pagar por un medio digital o de forma física con la comitiva organizadora.</p>
+    </div>
+
+    <!-- Cambiado de .card a .box para usar la estructura unificada de tu CSS -->
+    <section class="box">
+      <h2>📱 Pago digital (Yape / apps bancarias)</h2>
+      <p>
+        Puedes pagar por Yape o desde tu app bancaria (BCP, Interbank, Caja Cusco u otras)
+        usando los datos de abajo. Después, sube la captura de tu comprobante en el formulario
+        de inscripción.
+      </p>
+
+      <div class="qr-box">
+        <div class="qr-cargando" id="qr-cargando">Cargando QR...</div>
+        <img
+          id="qr-imagen"
+          src="https://files.catbox.moe/m55d7h.jpg"
+          alt="QR de pago Yape"
+          onload="document.getElementById('qr-cargando').style.display='none'; this.style.display='block';"
+          onerror="document.getElementById('qr-cargando').outerHTML='&lt;div class=&quot;qr-error&quot;&gt;No se pudo cargar la imagen del QR. Usa los datos de abajo para pagar manualmente.&lt;/div&gt;';">
+        <small>Escanea el código QR desde tu app de Yape para pagar directo</small>
+      </div>
+
+      <!-- El nuevo contenedor maestro de los datos bancarios -->
+      <div class="datos-pago-container">
+
+        <div class="item-banco titular-box">
+          <div class="etiqueta">Titular de la Cuenta</div>
+          <div class="valor-titular">Emerson Alexander Quispe Zea</div>
+        </div>
+
+        <div class="item-banco">
+          <div class="info-meta">
+            <div class="etiqueta">Número Yape</div>
+            <div class="valor" id="valor-yape">925535748</div>
+          </div>
+          <button class="btn-copiar" onclick="copiar('valor-yape', this)">
+            📋 Copiar
+          </button>
+        </div>
+
+        <div class="item-banco">
+          <div class="info-meta">
+            <div class="etiqueta">Cuenta Corriente BCP</div>
+            <div class="valor" id="valor-bcp">28516648723057</div>
+          </div>
+          <button class="btn-copiar" onclick="copiar('valor-bcp', this)">
+            📋 Copiar
+          </button>
+        </div>
+
+        <div class="item-banco">
+          <div class="info-meta">
+            <div class="etiqueta">Código Interbancario (CCI)</div>
+            <div class="valor" id="valor-cci">00228511664872305753</div>
+          </div>
+          <button class="btn-copiar" onclick="copiar('valor-cci', this)">
+            📋 Copiar
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Cambiado de .card a .box -->
+    <section class="box">
+      <h2>🏢 Pago físico</h2>
+      <p>
+        También puedes pagar directamente con la comitiva encargada de EXPOBIO. Ellos registran
+        tu pago y te entregan la confirmación correspondiente.
+      </p>
+      <ul class="lista-fisico">
+        <li>📍 Punto de pago: Coordinación EXPOBIO (fecha por definir por la comitiva)</li>
+        <li>👥 Responsable: Comitiva EXPOBIO</li>
+        <li>🧾 Solicita siempre tu comprobante o registro de pago</li>
+      </ul>
+    </section>
+
+    <div class="box-pagos-ayuda">
+		<button class="btn-ayuda-pago" onclick="window.top.location.href='index.html'"> 
+			Volver a la página de inscripción
+		</button>
+	</div>
+  </div>
+  </div>
+
+  <script>
+    function copiar(idElemento, boton) {
+      const texto = document.getElementById(idElemento).textContent;
+
+      function marcarExito() {
+        const original = boton.textContent;
+        boton.textContent = '✓ Copiado';
+        boton.classList.add('copiado');
+        setTimeout(function () {
+          boton.textContent = original;
+          boton.classList.remove('copiado');
+        }, 1500);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(texto).then(marcarExito).catch(function () {
+          alert('Copia este valor manualmente: ' + texto);
+        });
+      } else {
+        alert('Copia este valor manualmente: ' + texto);
+      }
+    }
+  </script>
+</body>
+</html>
