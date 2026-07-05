@@ -1,6 +1,6 @@
 /* GENERAL / BODY */
 body {
-    background-image: url(biologia-unsaac.jpeg);
+    background-image: url(biologia-unsaac.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -157,6 +157,49 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+
+/* BOTÓN DE CONSULTAS OPTIMIZADO (MÁS PEQUEÑO) */
+.box-consultas {
+    background-color: transparent;
+    text-align: center;
+    margin-top: 15px; /* Un poco de separación del resto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.btn-consultas {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #b0b0b0;
+    padding: 6px 14px; 
+    font-size: 0.85rem; 
+    border-radius: 20px; 
+    cursor: pointer;
+    width: auto;
+    max-width: 280px; 
+    transition: all 0.3s ease;
+}
+
+.btn-consultas:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+}
+
+.btn-consultas h1 {
+    font-size: 0.9rem; 
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.btn-consultas p {
+    font-size: 0.7rem; 
+    margin: 2px 0 0 0;
+    color: #888;
 }
 
 /* DETALLES DE PAGO BANCARIO */
@@ -494,6 +537,7 @@ html {
 }
 
 .btn-enviar-form:hover {
+    
     background: #ffffff;
 }
 
@@ -578,6 +622,7 @@ border: 1px solid rgba(255, 138, 101, 0.4);
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
 }
 
 .bloque-whatsapp-form p {
@@ -589,11 +634,12 @@ border: 1px solid rgba(255, 138, 101, 0.4);
 .bloque-whatsapp-form img {
     width: min(220px, 100%);
     height: auto;
+    display: block;
+    margin: 0 auto 12px;
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 10px;
     padding: 6px;
     background: #fff;
-    margin-bottom: 12px;
 }
 
 .btn-whatsapp-form {
@@ -628,10 +674,284 @@ border: 1px solid rgba(255, 138, 101, 0.4);
     background: rgba(255,255,255,0.2);
 }
 
+/* CONSULTA DE ESTADO (consultaEstado.html) */
+.consulta-dni {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: end;
+    box-sizing: border-box;
+}
+
+.consulta-dni .campo-form {
+    margin-bottom: 0;
+}
+
+.btn-consultar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px !important;
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    height: 42px;
+    white-space: nowrap;
+}
+
+.btn-consultar:hover {
+    background: #fff;
+}
+
+.resultado-consulta {
+    display: none;
+    margin-top: 22px;
+    padding: 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+}
+
+.resultado-consulta.visible {
+    display: block;
+}
+
+.resultado-fila {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 18px;
+    align-items: center;
+}
+
+.resultado-fila img {
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 14px;
+}
+
+.resultado-texto h3 {
+    margin: 0 0 8px;
+    font-family: sans-serif;
+    font-size: 1.05rem;
+    color: #fff;
+}
+
+.resultado-texto p {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    line-height: 1.5;
+}
+
+.resultado-bien {
+    border-left: 4px solid #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.resultado-mal {
+    border-left: 4px solid #ff5252;
+    background: rgba(185, 39, 14, 0.12);
+}
+
+.resultado-pendiente {
+    border-left: 4px solid #FFEB3B;
+    background: rgba(255, 235, 59, 0.08);
+}
+
+.resultado-no-existe {
+    border-left: 4px solid #ff5252;
+    background: rgba(185, 39, 14, 0.16);
+}
+
+.texto-no-existe {
+    color: #ff5252;
+    font-weight: 900;
+    font-size: 1.35rem;
+    text-align: center;
+    letter-spacing: .03em;
+    margin: 4px 0 16px;
+}
+
+.contacto-rechazo {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.88rem;
+}
+
+.botones-no-existe {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.btn-opcion-inscripcion {
+    flex: 1;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 25px !important;
+    background: rgba(255, 255, 255, 0.85);
+    color: #000;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-opcion-inscripcion:hover {
+    background: #fff;
+}
+
+/* Panel de botones de demo/preview, se saca fácil cuando esté el backend real */
+.demo-preview {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.demo-preview p {
+    font-size: 0.78rem;
+    color: #9aa6a3;
+    margin: 0 0 10px;
+}
+
+.demo-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.btn-demo {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-demo:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* GUÍA DE PAGO (guia.html) */
+.guia-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.guia-header h1 {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 1.7rem;
+    margin: 0 0 8px;
+}
+
+.guia-header p {
+    color: #cfd8d6;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.92rem;
+    margin: 0 auto;
+    max-width: 480px;
+    line-height: 1.5;
+}
+
+.guia-seccion {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.guia-seccion h2 {
+    color: #a5d6a7;
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guia-seccion > p {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 16px;
+}
+
+.qr-cargando {
+    color: #9aa6a3;
+    font-size: 0.85rem;
+    padding: 24px 0;
+    text-align: center;
+}
+
+.qr-error {
+    color: #ffab91;
+    font-size: 0.85rem;
+    padding: 12px 14px;
+    background: rgba(185, 39, 14, 0.14);
+    border: 1px solid rgba(255, 138, 101, 0.3);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.btn-copiar {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-copiar:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-copiar.copiado {
+    background: rgba(76, 175, 80, 0.35);
+    border-color: #4CAF50;
+    color: #c8e6c9;
+}
+
+@media (max-width: 480px) {
+    .item-banco {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: left;
+    }
+    .btn-copiar {
+        align-self: flex-end;
+    }
+}
+
 /* MEDIA QUERIES (RESPONSIVE) */
 @media (min-width: 640px) {
     .fila-form.dos { grid-template-columns: 1fr 1fr; }
     .fila-form.tres { grid-template-columns: 1fr 1fr 1fr; }
+    .botones-no-existe { flex-direction: row; }
 }
 
 @media (min-width: 768px){
@@ -640,5 +960,15 @@ border: 1px solid rgba(255, 138, 101, 0.4);
     }
     .box-estudiante-grupo10 {
         flex-direction: row;
+    }
+}
+
+@media (max-width: 480px) {
+    .consulta-dni {
+        grid-template-columns: 1fr;
+    }
+    .resultado-fila {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
 }

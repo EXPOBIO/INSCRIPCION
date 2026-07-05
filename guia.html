@@ -5,12 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>EXPOBIO 2026 · Guía de pago</title>
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="https://files.catbox.moe/zftv8w.png">
   <link rel="shortcut icon" href="https://files.catbox.moe/zftv8w.png">
 
   <!-- Color de la barra del navegador en móviles -->
-  <meta name="theme-color" content="#4CAF50">
+  <meta name="theme-color" content="#234F40">
 
   <!-- Google Fonts: Noto Serif -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,21 +23,22 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="carta">
-	<div class="box-titulo">
-		<img class="Escudo-UNSAAC" src="Logaso.png">
-	</div>
+  <div class="carta">
+    <div class="box-titulo">
+      <img class="Escudo-UNSAAC" src="Logaso.png">
     </div>
-    <div class="carta">
-  <div class="wrap">
-    <div class="top">
-      <h1> Guía de métodos de pago</h1>
+  </div>
+
+  <div class="carta">
+    <button class="btn-volver-form" onclick="window.top.location.href='index.html'">← Volver</button>
+
+    <div class="guia-header">
+      <h1>Guía de métodos de pago</h1>
       <p>Puedes pagar por un medio digital o de forma física con la comitiva organizadora.</p>
     </div>
 
-    <!-- Cambiado de .card a .box para usar la estructura unificada de tu CSS -->
-    <section class="box">
-      <h2>📱 Pago digital (Yape / apps bancarias)</h2>
+    <section class="guia-seccion">
+      <h2>Pago digital (Yape / apps bancarias)</h2>
       <p>
         Puedes pagar por Yape o desde tu app bancaria (BCP, Interbank, Caja Cusco u otras)
         usando los datos de abajo. Después, sube la captura de tu comprobante en el formulario
@@ -53,7 +56,6 @@
         <small>Escanea el código QR desde tu app de Yape para pagar directo</small>
       </div>
 
-      <!-- El nuevo contenedor maestro de los datos bancarios -->
       <div class="datos-pago-container">
 
         <div class="item-banco titular-box">
@@ -67,7 +69,7 @@
             <div class="valor" id="valor-yape">925535748</div>
           </div>
           <button class="btn-copiar" onclick="copiar('valor-yape', this)">
-            📋 Copiar
+            Copiar
           </button>
         </div>
 
@@ -77,7 +79,7 @@
             <div class="valor" id="valor-bcp">28516648723057</div>
           </div>
           <button class="btn-copiar" onclick="copiar('valor-bcp', this)">
-            📋 Copiar
+            Copiar
           </button>
         </div>
 
@@ -87,33 +89,25 @@
             <div class="valor" id="valor-cci">00228511664872305753</div>
           </div>
           <button class="btn-copiar" onclick="copiar('valor-cci', this)">
-            📋 Copiar
+            Copiar
           </button>
         </div>
 
       </div>
     </section>
 
-    <!-- Cambiado de .card a .box -->
-    <section class="box">
-      <h2>🏢 Pago físico</h2>
+    <section class="guia-seccion">
+      <h2>Pago físico</h2>
       <p>
         También puedes pagar directamente con la comitiva encargada de EXPOBIO. Ellos registran
         tu pago y te entregan la confirmación correspondiente.
       </p>
       <ul class="lista-fisico">
-        <li>📍 Punto de pago: Coordinación EXPOBIO (fecha por definir por la comitiva)</li>
-        <li>👥 Responsable: Comitiva EXPOBIO</li>
-        <li>🧾 Solicita siempre tu comprobante o registro de pago</li>
+        <li>Punto de pago: Coordinación EXPOBIO (fecha por definir por la comitiva)</li>
+        <li>Responsable: Comitiva EXPOBIO</li>
+        <li>Solicita siempre tu comprobante o registro de pago</li>
       </ul>
     </section>
-
-    <div class="box-pagos-ayuda">
-		<button class="btn-ayuda-pago" onclick="window.top.location.href='index.html'"> 
-			Volver a la página de inscripción
-		</button>
-	</div>
-  </div>
   </div>
 
   <script>
