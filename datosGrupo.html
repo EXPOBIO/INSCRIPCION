@@ -94,9 +94,9 @@
 				'<td><input type="text" class="grupo-apmaterno" required></td>' +
 				'<td><input type="text" class="grupo-universidad" required></td>' +
 				'<td><input type="text" class="grupo-facultad" required value="' + facultadDefault + '"></td>' +
-				'<td><input type="text" class="grupo-codigo" required maxlength="6" pattern="[0-9]{6}" inputmode="numeric"></td>' +
-				'<td><input type="text" class="grupo-dni" required maxlength="8" inputmode="numeric"></td>' +
-				'<td><input type="tel" class="grupo-celular" required></td>';
+				'<td><input type="text" class="grupo-codigo" required maxlength="6" pattern="[0-9]{6}" inputmode="numeric" placeholder="123456"></td>' +
+				'<td><input type="text" class="grupo-dni" required maxlength="8" pattern="[0-9]{8}" inputmode="numeric" placeholder="74012345"></td>' +
+				'<td><input type="tel" class="grupo-celular" required maxlength="9" pattern="9[0-9]{8}" inputmode="numeric" placeholder="912345678"></td>';
 			cuerpoTabla.appendChild(fila);
 		}
 
@@ -111,12 +111,48 @@
 			reiniciarFormularioGenerico(form, pantallaExito);
 		}
 
+		function validarIntegrantesGrupo() {
+			const filas = cuerpoTabla.querySelectorAll('tr');
+			const regexCodigo = /^[0-9]{6}$/;
+			const regexDni = /^[0-9]{8}$/;
+			const regexCelular = /^9[0-9]{8}$/;
+
+			for (let i = 0; i < filas.length; i++) {
+				const n = i + 1;
+				const codigo = filas[i].querySelector('.grupo-codigo');
+				const dni = filas[i].querySelector('.grupo-dni');
+				const celular = filas[i].querySelector('.grupo-celular');
+
+				if (!regexCodigo.test(codigo.value.trim())) {
+					codigo.classList.add('campo-invalido-form');
+					return { mensaje: 'El integrante N°' + n + ' tiene un código inválido. Debe ser exactamente 6 dígitos.', campo: codigo };
+				}
+				if (!regexDni.test(dni.value.trim())) {
+					dni.classList.add('campo-invalido-form');
+					return { mensaje: 'El integrante N°' + n + ' tiene un DNI inválido. Debe ser exactamente 8 dígitos.', campo: dni };
+				}
+				if (!regexCelular.test(celular.value.trim())) {
+					celular.classList.add('campo-invalido-form');
+					return { mensaje: 'El integrante N°' + n + ' tiene un celular inválido. Debe tener 9 dígitos y empezar con 9.', campo: celular };
+				}
+			}
+			return null;
+		}
+
 		form.addEventListener('submit', async function (e) {
 			e.preventDefault();
 
 			if (formularioTieneEspaciosVacios(form)) {
 				mensaje.className = 'error';
 				mensaje.textContent = 'Hay campos sin completar (marcados en rojo). Revisa que no queden vacíos ni con solo espacios.';
+				return;
+			}
+
+			const errorIntegrante = validarIntegrantesGrupo();
+			if (errorIntegrante) {
+				mensaje.className = 'error';
+				mensaje.textContent = errorIntegrante.mensaje;
+				errorIntegrante.campo.focus();
 				return;
 			}
 
