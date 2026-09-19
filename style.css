@@ -666,17 +666,19 @@ border: 1px solid rgba(255, 138, 101, 0.4);
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #2E7D5B;
-    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #ffffff;
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.85rem;
     padding: 11px 20px;
     border-radius: 999px;
+    transition: all 0.2s ease;
 }
 
 .btn-consulta-form:hover {
-    background: #26634A;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* WHATSAPP Y REINICIO */
