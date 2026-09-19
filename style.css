@@ -648,6 +648,37 @@ border: 1px solid rgba(255, 138, 101, 0.4);
     font-size: 0.88rem;
 }
 
+/* CONSULTAR PAGO */
+.bloque-consulta-form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+}
+
+.bloque-consulta-form p {
+    font-size: 0.88rem;
+    color: #cfd8d6;
+    margin: 0 0 12px;
+}
+
+.btn-consulta-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2E7D5B;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 11px 20px;
+    border-radius: 999px;
+}
+
+.btn-consulta-form:hover {
+    background: #26634A;
+}
+
 /* WHATSAPP Y REINICIO */
 .bloque-whatsapp-form {
     margin-top: 20px;
@@ -663,7 +694,7 @@ border: 1px solid rgba(255, 138, 101, 0.4);
 }
 
 .bloque-whatsapp-form img {
-    width: min(220px, 100%);
+    width: min(280px, 100%);
     height: auto;
     display: block;
     margin: 0 auto 12px;
