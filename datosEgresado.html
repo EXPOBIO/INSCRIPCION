@@ -93,7 +93,7 @@
 				<div class="archivo-input-form">
 					Sube una foto o captura de tu comprobante
 					<br>
-					<input type="file" id="voucher" accept="image/*,application/pdf" required>
+					<input type="file" id="voucher" accept="image/*" required>
 				</div>
 			</div>
 
@@ -129,6 +129,14 @@
 			mensaje.className = '';
 
 			const archivoVoucher = document.getElementById('voucher').files[0];
+			const errorVoucher = errorSiVoucherNoEsImagen(archivoVoucher);
+			if (errorVoucher) {
+				btnEnviar.disabled = false;
+				btnEnviar.textContent = 'Enviar inscripción';
+				mensaje.className = 'error';
+				mensaje.textContent = errorVoucher;
+				return;
+			}
 			const voucherBase64 = await leerArchivoComoBase64(archivoVoucher);
 			const voucherNombre = archivoVoucher ? archivoVoucher.name : '';
 

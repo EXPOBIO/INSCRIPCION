@@ -46,6 +46,16 @@ function leerArchivoComoBase64(archivo) {
   });
 }
 
+// El comprobante debe ser únicamente imagen. Devuelve un mensaje
+// de error si el archivo elegido no lo es, o null si es válido.
+function errorSiVoucherNoEsImagen(archivo) {
+  if (!archivo) return null; // el <input> es required; se valida en el form
+  if (archivo.type && archivo.type.indexOf('image/') !== 0) {
+    return 'El comprobante debe ser una imagen (foto o captura en JPG, PNG o WEBP). Los PDF no están permitidos.';
+  }
+  return null;
+}
+
 // Marca en rojo los campos requeridos que están vacíos (ignora los que
 // están dentro de un bloque oculto) y hace scroll al primero.
 function formularioTieneEspaciosVacios(form) {
