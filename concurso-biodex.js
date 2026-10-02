@@ -186,10 +186,8 @@ function aplicarModalidad() {
   const nota = document.getElementById('nota-modalidad');
   const seccionTematica = document.getElementById('seccion-tematica');
   const seccionSorteo = document.getElementById('seccion-sorteo');
-  const bloqueInscripcion = document.getElementById('bloque-archivo-inscripcion');
   const btnEnviar = document.getElementById('btn-enviar');
   const inputArchivoMatricula = document.getElementById('archivo-matricula');
-  const inputArchivoInscripcion = document.getElementById('archivo-inscripcion');
 
   if (esJunior) {
     titulo.textContent = 'Concurso BioDex Junior';
@@ -199,9 +197,7 @@ function aplicarModalidad() {
       'Los 4 deben estar inscritos en el EXPOBIO 2026 con estado <strong>aprobado</strong>.';
     seccionTematica.classList.add('oculto-form');
     seccionSorteo.classList.remove('oculto-form');
-    bloqueInscripcion.classList.remove('oculto-form');
     inputArchivoMatricula.required = true;
-    inputArchivoInscripcion.required = true;
     btnEnviar.textContent = 'Inscribir equipo al BioDex Junior';
   } else {
     titulo.textContent = 'Concurso BioDex';
@@ -211,10 +207,7 @@ function aplicarModalidad() {
       'con estado <strong>aprobado</strong>; se valida el DNI de cada uno al presionar "Verificar".';
     seccionTematica.classList.remove('oculto-form');
     seccionSorteo.classList.add('oculto-form');
-    bloqueInscripcion.classList.add('oculto-form');
     inputArchivoMatricula.required = true;
-    inputArchivoInscripcion.required = false;
-    inputArchivoInscripcion.value = '';
     btnEnviar.textContent = 'Inscribir equipo al BioDex';
   }
 
@@ -240,7 +233,6 @@ async function enviarEquipo() {
   const mensaje = document.getElementById('mensaje-form');
   const btnEnviar = document.getElementById('btn-enviar');
   const inputArchivoMatricula = document.getElementById('archivo-matricula');
-  const inputArchivoInscripcion = document.getElementById('archivo-inscripcion');
   const nombreEquipo = document.getElementById('nombre-equipo').value.trim();
   const esJunior = modalidad === 'junior';
   const tematica = esJunior ? '' : document.getElementById('tematica').value;
@@ -298,19 +290,6 @@ async function enviarEquipo() {
     mensaje.textContent = 'La constancia de matrícula debe adjuntarse como un archivo PDF.';
     return;
   }
-  if (esJunior) {
-    if (!inputArchivoInscripcion.files[0]) {
-      mensaje.className = 'error';
-      mensaje.textContent = 'Adjunta la constancia de inscripción al EXPOBIO 2026 en PDF.';
-      return;
-    }
-    const constanciaInscripcion = inputArchivoInscripcion.files[0];
-    if (constanciaInscripcion.type && constanciaInscripcion.type !== 'application/pdf') {
-      mensaje.className = 'error';
-      mensaje.textContent = 'La constancia de inscripción debe adjuntarse como PDF.';
-      return;
-    }
-  }
 
   btnEnviar.disabled = true;
   btnEnviar.textContent = 'Inscribiendo equipo...';
@@ -318,9 +297,6 @@ async function enviarEquipo() {
 
   try {
     const matriculaBase64 = await leerArchivoComoBase64(constanciaMatricula);
-    const inscripcionBase64 = esJunior
-      ? await leerArchivoComoBase64(inputArchivoInscripcion.files[0])
-      : null;
 
     const datos = {
       tipo: 'registroBioDex',
@@ -329,9 +305,7 @@ async function enviarEquipo() {
       tematica: tematica,
       integrantes: integrantes,
       constanciaMatriculaBase64: matriculaBase64,
-      constanciaMatriculaNombre: constanciaMatricula.name,
-      constanciaInscripcionBase64: inscripcionBase64,
-      constanciaInscripcionNombre: esJunior ? inputArchivoInscripcion.files[0].name : null
+      constanciaMatriculaNombre: constanciaMatricula.name
     };
     const respuesta = await enviarAConcursos(datos);
 
