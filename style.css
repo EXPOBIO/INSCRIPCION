@@ -403,11 +403,11 @@ html {
 .seccion-form {
     text-align: left;
     width: 100%;
-    margin-top: 22px;
+    margin-top: 14px;
 }
 
 .seccion-form:first-of-type {
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .seccion-form h3 {
@@ -416,13 +416,13 @@ html {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .07em;
-    margin: 0 0 14px;
-    padding-bottom: 8px;
+    margin: 0 0 8px;
+    padding-bottom: 6px;
     border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
 .campo-form {
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
 .campo-form label {
@@ -442,7 +442,8 @@ html {
 
 .campo-form input[type="text"],
 .campo-form input[type="tel"],
-.campo-form select {
+.campo-form select,
+.campo-form textarea {
     width: 100%;
     max-width: 420px;
     padding: 10px 12px;
@@ -452,6 +453,7 @@ html {
     color: #ffffff;
     font-family: Arial, sans-serif;
     font-size: 0.92rem;
+    resize: vertical;
 }
 
 .campo-form select option {
@@ -463,7 +465,8 @@ html {
 }
 
 .campo-form input:focus,
-.campo-form select:focus {
+.campo-form select:focus,
+.campo-form textarea:focus {
     outline: none;
     border-color: #4CAF50;
     background: rgba(255,255,255,0.1);
@@ -487,8 +490,8 @@ html {
     background: rgba(76, 175, 80, 0.08);
     border: 1px dashed rgba(165, 214, 167, 0.4);
     border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 16px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
     font-size: 0.82rem;
     color: #d8e3d9;
 }
@@ -537,7 +540,7 @@ html {
 .archivo-input-form {
     border: 1.5px dashed rgba(255,255,255,0.25);
     border-radius: 12px;
-    padding: 18px;
+    padding: 12px;
     text-align: center;
     font-size: 0.82rem;
     color: #cfd8d6;
@@ -553,7 +556,7 @@ html {
 .btn-enviar-form {
     display: block;
     width: 100%;
-    margin-top: 22px;
+    margin-top: 16px;
     padding: 12px 16px;
     border: none;
     border-radius: 25px !important;
@@ -1009,6 +1012,373 @@ border: 1px solid rgba(255, 138, 101, 0.4);
     .btn-copiar {
         align-self: flex-end;
     }
+}
+
+/* CONCURSOS */
+.box-concursos {
+    text-align: center;
+}
+
+.box-concursos-logo h1 {
+    color: #ffffff;
+    font-family: Galindo, sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    margin: 0 0 4px;
+}
+
+.box-concursos-logo h2 {
+    color: #a5d6a7;
+    font-family: 'Noto Serif', serif;
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0 0 18px;
+}
+
+.concurso-status {
+    background: rgba(76, 175, 80, 0.08);
+    border: 1px dashed rgba(165, 214, 167, 0.4);
+    border-radius: 16px;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: #d8e3d9;
+}
+
+.concurso-status p {
+    margin: 0;
+}
+
+.concurso-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.btn-concurso {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 20px 14px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 28px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.btn-concurso input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.btn-concurso h1 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.btn-concurso p {
+    font-size: 0.72rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.3;
+}
+
+.btn-concurso:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+}
+
+.btn-concurso.seleccionado {
+    background: rgba(76, 175, 80, 0.18);
+    border-color: #4CAF50;
+    box-shadow: 0 0 18px rgba(76, 175, 80, 0.35);
+}
+
+.btn-concurso.cerrado {
+    opacity: 0.5;
+    cursor: default;
+    border-style: dashed;
+}
+
+.btn-concurso.cerrado:hover {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: none;
+}
+
+.concurso-etiqueta {
+    margin-top: 8px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: 4px 12px;
+    border-radius: 999px;
+}
+
+.concurso-etiqueta.abierto {
+    background: rgba(76, 175, 80, 0.25);
+    color: #c8e6c9;
+    border: 1px solid rgba(165, 214, 167, 0.5);
+}
+
+.concurso-etiqueta.cerrado {
+    background: rgba(255, 255, 255, 0.08);
+    color: #9aa6a3;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (min-width: 640px) {
+    .concurso-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+    .concurso-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.concurso-nota {
+    font-size: 0.78rem;
+    color: #9aa6a3;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* BANNER CONCURSOS (index.html) */
+.box-banner-concursos {
+    text-align: center;
+    padding: 12px 8px;
+}
+
+.box-banner-concursos h1 {
+    color: #FFEB3B;
+    font-family: 'Caveat Brush', 'Noto Serif', serif;
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0 0 6px;
+}
+
+.box-banner-concursos p {
+    color: #cfd8d6;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.9rem;
+    margin: 0 0 14px;
+    line-height: 1.5;
+}
+
+.btn-banner-concursos {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.btn-banner-concursos:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+/* INTEGRANTES BIODEX */
+.integrante-form {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.03);
+    text-align: left;
+}
+
+.integrante-form .etiqueta-integrante {
+    color: #a5d6a7;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin: 0 0 6px;
+}
+
+.integrante-form .fila-dni {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: end;
+}
+
+.integrante-form .fila-dni .campo-form {
+    margin-bottom: 0;
+}
+
+.btn-verificar-integrante {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 25px !important;
+    background: rgba(255,255,255,0.85);
+    color: #000;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    height: 42px;
+    white-space: nowrap;
+}
+
+.btn-verificar-integrante:hover {
+    background: #fff;
+}
+
+.btn-verificar-integrante:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.verif-estado {
+    display: none;
+    margin-top: 6px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.verif-estado.visible {
+    display: block;
+}
+
+.verif-estado.bien {
+    background: rgba(76,175,80,0.12);
+    color: #c8e6c9;
+    border: 1px solid rgba(165,214,167,0.4);
+}
+
+.verif-estado.mal {
+    background: rgba(185,39,14,0.14);
+    color: #ffcdc0;
+    border: 1px solid rgba(255,138,101,0.4);
+}
+
+.verif-estado.pendiente {
+    background: rgba(255,235,59,0.08);
+    color: #f4e9a0;
+    border: 1px solid rgba(255,235,59,0.35);
+}
+
+.radio-representante {
+    margin-top: 8px;
+}
+
+.radio-representante .rep-opcion {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: #e8e8e8;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    transition: all 0.2s ease;
+}
+
+.radio-representante .rep-opcion:hover {
+    border-color: rgba(255,255,255,0.4);
+}
+
+.radio-representante input[type="radio"] {
+    accent-color: #4CAF50;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Toggle BioDex / BioDex Junior */
+.toggle-concurso {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.btn-toggle-concurso {
+    flex: 1;
+    min-width: 160px;
+    padding: 12px 16px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-radius: 25px !important;
+    color: #ffffff;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle-concurso.activo {
+    background: rgba(76, 175, 80, 0.25);
+    border-color: #4CAF50;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.35);
+}
+
+.btn-toggle-concurso:hover:not(.activo) {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.7);
+}
+
+.archivo-input-form + .archivo-input-form {
+    margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+    .integrante-form .fila-dni {
+        grid-template-columns: 1fr;
+    }
+    .btn-verificar-integrante {
+        width: 100%;
+    }
+}
+
+/* VOLVER (concursos.html) */
+.box-volver {
+    text-align: center;
+}
+
+.btn-volver-concursos {
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Noto Serif', serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.btn-volver-concursos:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 /* MEDIA QUERIES (RESPONSIVE) */

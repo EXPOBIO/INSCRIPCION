@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base target="top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Fotografía - EXPOBIO 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://files.catbox.moe/zftv8w.png">
+    <link rel="shortcut icon"
+        href="https://files.catbox.moe/zftv8w.png">
+</head>
+
+<body>
+    <div class="carta">
+        <button class="btn-volver-form" onclick="window.top.location.href='concursos.html'">← Atrás</button>
+
+        <div class="box-concursos">
+            <div class="box-concursos-logo">
+                <h1>Concurso de Fotografía</h1>
+                <h2>Fotografía naturalista y microscópica</h2>
+            </div>
+
+            <div class="pantalla-exito-form" id="pantalla-exito">
+                <div class="icono-exito">🎉</div>
+                <h2>¡Inscrito al concurso!</h2>
+                <p id="texto-exito"></p>
+                <br>
+                <div class="bloque-consulta-form">
+                    <p>El organizador se contactará contigo al celular que registraste en tu inscripción.</p>
+                    <button type="button" class="btn-reiniciar-form" onclick="reiniciar()">Inscribir otra fotografía</button>
+                </div>
+            </div>
+
+            <form id="form-concurso">
+                <div class="seccion-form">
+                    <h3>1. Datos de la fotografía</h3>
+                    <div class="fila-form dos" id="campos-concurso"></div>
+                </div>
+
+                <div class="seccion-form">
+                    <h3>2. Verifica tu inscripción</h3>
+                    <div class="fila-dni">
+                        <div class="campo-form">
+                            <label for="dni">DNI</label>
+                            <input type="text" id="dni" name="dni" maxlength="8" pattern="[0-9]{8}" inputmode="numeric" required>
+                            <div class="ayuda-form">Debe coincidir con tu inscripción al evento.</div>
+                        </div>
+                        <button type="button" id="btn-verificar" class="btn-verificar-integrante">Verificar</button>
+                    </div>
+                    <div class="verif-estado" id="estado-dni"></div>
+                </div>
+
+                <div class="seccion-form oculto-form" id="seccion-archivo">
+                    <h3>3. Adjunta tu fotografía</h3>
+                    <div class="archivo-input-form">
+                        <span id="archivo-etiqueta">Fotografía digital</span>
+                        <br>
+                        <input type="file" id="archivo" accept="image/jpeg,image/png">
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-enviar" class="btn-enviar-form">Inscribir mi fotografía</button>
+                <div id="mensaje-form"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="concurso-form.js"></script>
+    <script>
+        window.CONCURSO = {
+            nombre: 'Fotografía',
+            campos: [
+                { clave: 'categoria', etiqueta: 'Categoría', tipo: 'select',
+                  opciones: ['Fauna', 'Flora', 'Paisajes', 'Fotomicrografía'] },
+                { clave: 'titulo', etiqueta: 'Título de la obra', tipo: 'text' },
+                { clave: 'lugarFecha', etiqueta: 'Lugar y fecha aproximada de la fotografía', tipo: 'text' },
+                { clave: 'especie', etiqueta: 'Nombre de la especie (si corresponde)', tipo: 'text' },
+                { clave: 'texto', etiqueta: 'Breve texto explicativo (máx 20 palabras)', tipo: 'text' },
+                { clave: 'detalle', etiqueta: 'Microscopio y aumento (solo fotomicrografías)', tipo: 'text' }
+            ],
+            archivo: {
+                etiqueta: 'Fotografía digital (JPG o PNG, 300 dpi, máx 10 MB)',
+                accept: 'image/jpeg,image/png'
+            }
+        };
+
+        function reiniciar() {
+            document.getElementById('pantalla-exito').classList.remove('visible');
+            document.getElementById('form-concurso').style.display = 'block';
+            document.getElementById('form-concurso').reset();
+        }
+
+        inicializarConcursoForm();
+    </script>
+</body>
+</html>

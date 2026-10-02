@@ -56,6 +56,31 @@ function errorSiVoucherNoEsImagen(archivo) {
   return null;
 }
 
+// ==========================================================
+// Envío al backend único de INSCRIPCION (verificación de DNI y
+// registro de concursos). Mismo AppScript que las inscripciones.
+// ==========================================================
+const API_CONCURSOS_URL = API_URL;
+
+async function enviarVerifConcurso(payload) {
+  const resp = await fetch(API_CONCURSOS_URL, {
+    method: 'POST',
+    redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(payload)
+  });
+  if (!resp.ok) throw new Error('Error de red: ' + resp.status);
+  return resp.json();
+}
+
+// Verifica por DNI si la persona puede participar en un concurso:
+// inscrito aprobado o integrante de la comisión organizadora.
+async function verificarDniConcurso(dni) {
+  const respuesta = await enviarVerifConcurso({ tipo: 'verificarParticipante', dni: dni.replace(/\./g, '') });
+  if (!respuesta.ok) throw new Error(respuesta.mensaje || 'No se pudo verificar el DNI.');
+  return respuesta;
+}
+
 // Marca en rojo los campos requeridos que están vacíos (ignora los que
 // están dentro de un bloque oculto) y hace scroll al primero.
 function formularioTieneEspaciosVacios(form) {

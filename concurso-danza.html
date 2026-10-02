@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base target="top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Danza - EXPOBIO 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://files.catbox.moe/zftv8w.png">
+    <link rel="shortcut icon"
+        href="https://files.catbox.moe/zftv8w.png">
+</head>
+
+<body>
+    <div class="carta">
+        <button class="btn-volver-form" onclick="window.top.location.href='concursos.html'">← Atrás</button>
+
+        <div class="box-concursos">
+            <div class="box-concursos-logo">
+                <h1>Concurso de Danza</h1>
+                <h2>Expresiones tradicionales del Perú</h2>
+            </div>
+
+            <div class="pantalla-exito-form" id="pantalla-exito">
+                <div class="icono-exito">🎉</div>
+                <h2>¡Delegación inscrita!</h2>
+                <p id="texto-exito"></p>
+                <br>
+                <div class="bloque-consulta-form">
+                    <p>El organizador se contactará contigo al celular que registraste en tu inscripción.</p>
+                    <button type="button" class="btn-reiniciar-form" onclick="reiniciar()">Inscribir otra danza</button>
+                </div>
+            </div>
+
+            <form id="form-concurso">
+                <div class="seccion-form">
+                    <h3>1. Datos de la danza</h3>
+                    <div class="fila-form dos" id="campos-concurso"></div>
+                    <div class="nota-form">
+                        Danzas de origen peruano, no más de 8 personas (4 parejas). Solo el representante
+                        completa la inscripción; todos deben estar inscritos en el EXPOBIO 2026.
+                    </div>
+                </div>
+
+                <div class="seccion-form">
+                    <h3>2. Verifica tu inscripción</h3>
+                    <div class="fila-dni">
+                        <div class="campo-form">
+                            <label for="dni">DNI del representante</label>
+                            <input type="text" id="dni" name="dni" maxlength="8" pattern="[0-9]{8}" inputmode="numeric" required>
+                            <div class="ayuda-form">Debe coincidir con tu inscripción al evento.</div>
+                        </div>
+                        <button type="button" id="btn-verificar" class="btn-verificar-integrante">Verificar</button>
+                    </div>
+                    <div class="verif-estado" id="estado-dni"></div>
+                </div>
+
+                <div class="seccion-form oculto-form" id="seccion-archivo">
+                    <div class="archivo-input-form">
+                        <span id="archivo-etiqueta"></span>
+                        <br>
+                        <input type="file" id="archivo">
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-enviar" class="btn-enviar-form">Inscribir la danza</button>
+                <div id="mensaje-form"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="concurso-form.js"></script>
+    <script>
+        window.CONCURSO = {
+            nombre: 'Danza',
+            campos: [
+                { clave: 'nombreDanza', etiqueta: 'Nombre de la danza', tipo: 'text' },
+                { clave: 'resenia', etiqueta: 'Reseña de la danza', tipo: 'textarea' },
+                { clave: 'participantes', etiqueta: 'Lista de participantes (máx 8 / 4 parejas)', tipo: 'textarea',
+                  ayuda: 'Nombres y apellidos de los participantes, uno por línea.' },
+                { clave: 'representante', etiqueta: 'Nombre del representante', tipo: 'text' },
+                { clave: 'centro', etiqueta: 'Nombre del Centro de investigación o grupo de estudiantes', tipo: 'text' }
+            ],
+            archivo: null
+        };
+
+        function reiniciar() {
+            document.getElementById('pantalla-exito').classList.remove('visible');
+            document.getElementById('form-concurso').style.display = 'block';
+            document.getElementById('form-concurso').reset();
+        }
+
+        inicializarConcursoForm();
+    </script>
+</body>
+</html>

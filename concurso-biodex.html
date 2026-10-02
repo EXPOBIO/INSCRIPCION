@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base target="top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>BioDex - EXPOBIO 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://files.catbox.moe/zftv8w.png">
+    <link rel="shortcut icon"
+        href="https://files.catbox.moe/zftv8w.png">
+</head>
+
+<body>
+    <div class="carta">
+        <button class="btn-volver-form" onclick="window.top.location.href='concursos.html'">← Atrás</button>
+
+        <div class="box-concursos">
+            <div class="box-concursos-logo">
+                <h1 id="titulo-concurso">Concurso BioDex</h1>
+                <h2 id="subtitulo-concurso">Conocimientos en Ciencias Biológicas / Áreas Naturales Protegidas del Cusco · Bacterias</h2>
+            </div>
+
+            <div class="seccion-form">
+                <h3>Elige el concurso</h3>
+                <div class="toggle-concurso" id="toggle-concurso">
+                    <button type="button" class="btn-toggle-concurso activo" data-modalidad="biodex">BioDex</button>
+                    <button type="button" class="btn-toggle-concurso" data-modalidad="junior">BioDex Junior</button>
+                </div>
+                <div class="nota-form" id="nota-modalidad">
+                    Equipo de 4 integrantes y líder/representante. Los 4 deben estar inscritos en el EXPOBIO 2026
+                    con estado <strong>aprobado</strong>; se valida el DNI de cada uno al presionar "Verificar".
+                </div>
+            </div>
+
+            <div class="pantalla-exito-form" id="pantalla-exito">
+                <div class="icono-exito">🎉</div>
+                <h2>¡Equipo inscrito!</h2>
+                <p id="texto-exito"></p>
+                <br>
+                <div class="bloque-consulta-form">
+                    <p>El organizador se contactará contigo al celular del representante.</p>
+                    <button type="button" class="btn-reiniciar-form" onclick="reiniciarBiodex()">Inscribir otro equipo</button>
+                </div>
+            </div>
+
+            <form id="form-concurso">
+                <div class="seccion-form">
+                    <h3>1. Datos del equipo</h3>
+                    <div class="fila-form">
+                        <div class="campo-form">
+                            <label for="nombre-equipo">Indique el nombre del Centro de Investigación o del grupo de estudiantes que representa</label>
+                            <input type="text" id="nombre-equipo" name="nombreEquipo"
+                                placeholder="Ej. Los Puchamones" required>
+                        </div>
+                    </div>
+                    </div>
+
+                <div class="seccion-form">
+                    <h3>2. Integrantes del equipo (4)</h3>
+                    <div id="contenedor-integrantes"></div>
+                    <div class="nota-form" id="nota-integrantes">
+                        Marca con el radio quién será el <strong>representante</strong> (líder). Todos deben tener su
+                        inscripción al EXPOBIO 2026 aprobada.
+                    </div>
+                </div>
+
+                <div class="seccion-form" id="seccion-tematica">
+                    <h3>3. Temática elegida</h3>
+                    <div class="fila-form">
+                        <div class="campo-form">
+                            <label for="tematica">Temática</label>
+                            <select id="tematica" name="tematica">
+                                <option value="">Seleccione una temática</option>
+                                <option value="Áreas Naturales Protegidas del Cusco">Áreas Naturales Protegidas del Cusco</option>
+                                <option value="Bacterias">Bacterias</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="seccion-form oculto-form" id="seccion-sorteo">
+                    <h3>3. Temática</h3>
+                    <div class="nota-form">
+                        La temática del BioDex Junior se sortea entre Zoología, Botánica, Biología celular y Ecología.
+                        Solo participan cachimbos (ingresantes 2026-I y 2026-II).
+                    </div>
+                </div>
+
+                <div class="seccion-form">
+                    <h3>4. Adjunta los documentos</h3>
+                    <div class="archivo-input-form">
+                        <span id="archivo-etiqueta-matricula">Constancia de matrícula de los 4 integrantes (un solo PDF)</span>
+                        <br>
+                        <input type="file" id="archivo-matricula" accept="application/pdf">
+                    </div>
+                    <div class="archivo-input-form oculto-form" id="bloque-archivo-inscripcion" style="margin-top:12px;">
+                        <span>Constancia de inscripción al EXPOBIO 2026 (PDF)</span>
+                        <br>
+                        <input type="file" id="archivo-inscripcion" accept="application/pdf">
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-enviar" class="btn-enviar-form">Inscribir equipo al BioDex</button>
+                <div id="mensaje-form"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="concurso-biodex.js"></script>
+</body>
+</html>
