@@ -1141,6 +1141,12 @@ border: 1px solid rgba(255, 138, 101, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.concurso-etiqueta.ultimo-dia {
+    background: rgba(255, 152, 0, 0.28);
+    color: #ffe0b2;
+    border: 1px solid rgba(255, 183, 77, 0.6);
+}
+
 @media (min-width: 640px) {
     .concurso-grid { grid-template-columns: repeat(2, 1fr); }
 }
